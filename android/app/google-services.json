@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "966988385090",
+    "project_id": "news-tren",
+    "storage_bucket": "news-tren.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:966988385090:android:17cd0788041ec52f6dd6db",
+        "android_client_info": {
+          "package_name": "com.example.news_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2hmINEXMZ9kN2WedAR_e2MIKt413-fhU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
