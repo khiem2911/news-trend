@@ -1,6 +1,6 @@
 import 'package:email_otp/email_otp.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:news_app/screens/password/verification_code.dart';
 
 class ChangePassword extends StatefulWidget {
   const ChangePassword({super.key});
@@ -11,53 +11,35 @@ class ChangePassword extends StatefulWidget {
 
 class _ChangePasswordState extends State<ChangePassword> {
   final _currentMailController = TextEditingController();
-  final _newPassController = TextEditingController();
   bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
-    // void _onChangePass() {
-    //   final temptCurrent = _currentMailController.text;
-    //   final temptNew = _newPassController.text;
-    //   final currentUser = FirebaseAuth.instance.currentUser;
-
-    //   setState(() {
-    //     _isLoading = true;
-    //   });
-
-    //   if ((temptCurrent.trim().isEmpty || temptNew.trim().isEmpty) &&
-    //       (temptCurrent.length < 6 || temptNew.length < 6) &&
-    //       temptCurrent != currentUser!.email) {
-    //     return;
-    //   }
-
-    //   currentUser!.updatePassword(temptNew).then((_) {
-    //     ScaffoldMessenger.of(context).clearSnackBars();
-    //     ScaffoldMessenger.of(context).showSnackBar(
-    //         const SnackBar(content: Text('Change Password Sucsessfull')));
-    //     setState(() {
-    //       _isLoading = false;
-    //     });
-    //   }).onError((error, stackTrace) {
-    //     setState(() {
-    //       _isLoading = false;
-    //     });
-    //     ScaffoldMessenger.of(context).clearSnackBars();
-    //     ScaffoldMessenger.of(context)
-    //         .showSnackBar(SnackBar(content: Text(error.toString())));
-    //   });
-    // }
-
     void _onGetEmailOTP() {
-      print('ok');
+      if (_currentMailController.text.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Please enter email field')));
+        return;
+      }
+
+      setState(() {
+        _isLoading = true;
+      });
+
       EmailOTP.config(
         appName: 'News App',
         otpType: OTPType.numeric,
         emailTheme: EmailTheme.v6,
         otpLength: 4,
       );
-      EmailOTP.sendOTP(email: 'phamduykhiem113@gmail.com').then((_) {
-        print(EmailOTP.getOTP());
+      EmailOTP.sendOTP(email: _currentMailController.text).then((_) {
+        setState(() {
+          _isLoading = false;
+        });
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (ctx) => VertificationCode(
+                  emailSent: _currentMailController.text,
+                )));
       });
     }
 
@@ -92,27 +74,6 @@ class _ChangePasswordState extends State<ChangePassword> {
           const SizedBox(
             height: 20,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16),
-            child: Container(
-              width: double.infinity,
-              height: 50,
-              decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(5)),
-                  border: Border.all(width: 1, color: Colors.orange)),
-              child: TextField(
-                controller: _newPassController,
-                decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.only(left: 16),
-                    border: InputBorder.none,
-                    labelText: 'New Password'),
-                style: const TextStyle(color: Colors.black),
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 25,
-          ),
           Row(
             children: [
               const Spacer(),
@@ -129,12 +90,14 @@ class _ChangePasswordState extends State<ChangePassword> {
                         decoration: BoxDecoration(
                             color: Colors.orange,
                             borderRadius: BorderRadius.circular(25)),
-                        child: TextButton(
-                            onPressed: _onGetEmailOTP,
-                            child: const Text(
-                              'Save',
-                              style: TextStyle(color: Colors.white),
-                            )),
+                        child: _isLoading
+                            ? const CircularProgressIndicator()
+                            : TextButton(
+                                onPressed: _onGetEmailOTP,
+                                child: const Text(
+                                  'Send',
+                                  style: TextStyle(color: Colors.white),
+                                )),
                       ),
                     ),
             ],
