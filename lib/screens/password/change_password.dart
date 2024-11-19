@@ -1,3 +1,4 @@
+import 'package:email_otp/email_otp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -15,35 +16,48 @@ class _ChangePasswordState extends State<ChangePassword> {
 
   @override
   Widget build(BuildContext context) {
-    void _onChangePass() {
-      final temptCurrent = _currentMailController.text;
-      final temptNew = _newPassController.text;
-      final currentUser = FirebaseAuth.instance.currentUser;
+    // void _onChangePass() {
+    //   final temptCurrent = _currentMailController.text;
+    //   final temptNew = _newPassController.text;
+    //   final currentUser = FirebaseAuth.instance.currentUser;
 
-      setState(() {
-        _isLoading = true;
-      });
+    //   setState(() {
+    //     _isLoading = true;
+    //   });
 
-      if ((temptCurrent.trim().isEmpty || temptNew.trim().isEmpty) &&
-          (temptCurrent.length < 6 || temptNew.length < 6) &&
-          temptCurrent != currentUser!.email) {
-        return;
-      }
+    //   if ((temptCurrent.trim().isEmpty || temptNew.trim().isEmpty) &&
+    //       (temptCurrent.length < 6 || temptNew.length < 6) &&
+    //       temptCurrent != currentUser!.email) {
+    //     return;
+    //   }
 
-      currentUser!.updatePassword(temptNew).then((_) {
-        ScaffoldMessenger.of(context).clearSnackBars();
-        ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Change Password Sucsessfull')));
-        setState(() {
-          _isLoading = false;
-        });
-      }).onError((error, stackTrace) {
-        setState(() {
-          _isLoading = false;
-        });
-        ScaffoldMessenger.of(context).clearSnackBars();
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(error.toString())));
+    //   currentUser!.updatePassword(temptNew).then((_) {
+    //     ScaffoldMessenger.of(context).clearSnackBars();
+    //     ScaffoldMessenger.of(context).showSnackBar(
+    //         const SnackBar(content: Text('Change Password Sucsessfull')));
+    //     setState(() {
+    //       _isLoading = false;
+    //     });
+    //   }).onError((error, stackTrace) {
+    //     setState(() {
+    //       _isLoading = false;
+    //     });
+    //     ScaffoldMessenger.of(context).clearSnackBars();
+    //     ScaffoldMessenger.of(context)
+    //         .showSnackBar(SnackBar(content: Text(error.toString())));
+    //   });
+    // }
+
+    void _onGetEmailOTP() {
+      print('ok');
+      EmailOTP.config(
+        appName: 'News App',
+        otpType: OTPType.numeric,
+        emailTheme: EmailTheme.v6,
+        otpLength: 4,
+      );
+      EmailOTP.sendOTP(email: 'phamduykhiem113@gmail.com').then((_) {
+        print(EmailOTP.getOTP());
       });
     }
 
@@ -116,7 +130,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                             color: Colors.orange,
                             borderRadius: BorderRadius.circular(25)),
                         child: TextButton(
-                            onPressed: _onChangePass,
+                            onPressed: _onGetEmailOTP,
                             child: const Text(
                               'Save',
                               style: TextStyle(color: Colors.white),

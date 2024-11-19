@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app/model/news.dart';
 import 'package:news_app/provider/saved_provider.dart';
-import 'package:news_app/screens/news_detail.dart';
+import 'package:news_app/screens/news/news_detail.dart';
 import 'package:news_app/widgets/filter_news_item.dart';
 import 'package:news_app/widgets/search_app_bar.dart';
 

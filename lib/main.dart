@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app/provider/onBoarding_provider.dart';
-import 'package:news_app/screens/on_boarding.dart';
-import 'package:news_app/screens/splash.dart';
-import 'package:news_app/screens/tabs.dart';
+import 'package:news_app/screens/boarding/on_boarding.dart';
+import 'package:news_app/screens/splash/splash.dart';
+import 'package:news_app/screens/tabs/tabs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
-import 'package:news_app/screens/auth.dart';
+import 'package:news_app/screens/auth/auth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

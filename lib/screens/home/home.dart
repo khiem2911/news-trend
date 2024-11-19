@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:news_app/model/news.dart';
 import 'package:news_app/provider/news_provider.dart';
 import 'package:news_app/provider/user_provider.dart';
-import 'package:news_app/screens/news_detail.dart';
+import 'package:news_app/screens/news/news_detail.dart';
 import 'package:news_app/widgets/filter_news_item.dart';
 import 'package:news_app/widgets/news_item.dart';
 

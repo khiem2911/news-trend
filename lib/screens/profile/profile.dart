@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:news_app/provider/saved_provider.dart';
 import 'package:news_app/provider/user_provider.dart';
-import 'package:news_app/screens/auth.dart';
-import 'package:news_app/screens/change_password.dart';
+import 'package:news_app/screens/auth/auth.dart';
+import 'package:news_app/screens/password/change_password.dart';
 import 'package:news_app/widgets/profile_item.dart';
 
 FirebaseAuth currentAuth = FirebaseAuth.instance;

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:news_app/provider/user_provider.dart';
-import 'package:news_app/screens/explore.dart';
-import 'package:news_app/screens/home.dart';
-import 'package:news_app/screens/profile.dart';
-import 'package:news_app/screens/saved.dart';
+import 'package:news_app/screens/explore/explore.dart';
+import 'package:news_app/screens/home/home.dart';
+import 'package:news_app/screens/profile/profile.dart';
+import 'package:news_app/screens/saved/saved.dart';
 
 class TabsScreen extends ConsumerStatefulWidget {
   TabsScreen({super.key, this.userData});
